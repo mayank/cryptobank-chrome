@@ -4,6 +4,7 @@ var API_TIMEOUT = 600000; // 10 mins
 var investment = 110000; // Rs. 1,10,000
 var PERCENT_HALT = 5;
 var portfolio = {
+    "BTC": "0.0",
     "ETC": "14.25714286",
     "ETH": "2.50687989",
     "ANS": "22.06482200",
