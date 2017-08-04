@@ -2,7 +2,7 @@ var zebpayResult = null;
 var coinmarketcapResult = null;
 var API_TIMEOUT = 600000; // 10 mins
 var investment = 110000; // Rs. 1,10,000
-var PERCENT_HALT = 5;
+var PERCENT_HALT = 3;
 var portfolio = {
     "BTC": "0.0",
     "ETC": "14.25714286",
