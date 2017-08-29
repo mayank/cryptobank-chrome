@@ -53,29 +53,38 @@ function startFetchingData() {
         });
 
     });
-    walletBalance -= 0.05;
 
     $('#totalpre').html(walletBalance.toFixed(5));
+    
+    var inrCost = walletBalance * zebpayAPI.sell;
+    var profitLoss = (inrCost - investment) / investment;
+    
+    $('#calculated').html(Math.abs(profitLoss * 100).toFixed(2) + '%');
+    if (profitLoss < 0) {
+        $('#calculated').addClass("text-danger").removeClass("text-success");
+    } else {
+        $('#calculated').addClass("text-success").removeClass("text-danger");
+    }
+    
     $('#totalpost').attr('data-balance', walletBalance).addClass('totalpost');
 
     $('.totalpost').each(function() {
         var balance = parseFloat($(this).attr('data-balance'));
         var inr = balance * parseFloat(zebpayAPI.sell);
         
-        $('#btc').html(zebpayAPI.sell.toLocaleString('en-US', loc));
         $(this).html(Math.floor(inr).toLocaleString('en-US', loc));
         
-        var profitLoss = (inr - investment) / investment;
+        /*
+        
 
-        $('#calculated').html(Math.abs(profitLoss * 100).toFixed(2) + '%');
+        
 
-        if (profitLoss < 0) {
-            $('#calculated').addClass("danger").removeClass("success");
-        } else {
-            $('#calculated').addClass("success").removeClass("danger");
-        }
-
+        
+        */
     });
+    
+    
+    $('#btc').html(zebpayAPI.sell.toLocaleString('en-US', loc));
 }
 
 function setTheTuple(coin, balance) {
