@@ -1,23 +1,19 @@
 var zebpayResult = null;
 var coinmarketcapResult = null;
 var API_TIMEOUT = 30000; // 30 seconds
-var investment = 109798; // Rs.1,10,000
-var PERCENT_HALT = 3;
+var investment = 160000; // Rs.1,70,000
+var PERCENT_HALT = 1;
 var portfolio = {
-    "BTC": "0.00000133",
-    "BCH": "0.00000040",
+    "BTC": "0.0",
     "ETH": "0.0",
-    "MIOTA": "109.62669602",
-    "NEO": "44.25316673",
     "LTC": "0.0",
-    "BCH": "0.0",
     "DASH": "0.0",
-    "TKN": "117.99275126"
+    "NEO": "92.19540918"
 };
 var notify = {};
 
-
 chrome.runtime.onConnect.addListener(function(port) {
+    console.log('Client Connected');
     
      port.onMessage.addListener(function(msg) {
          
@@ -65,7 +61,7 @@ function getChangeMessage(coin){
     var message = "";
     message += coin.percent_change_1h + "% [" + coin.percent_change_24h + "%] with value " + coin.price_usd + "$\n";
     message += "Your coin now values ";
-    message += "Rs. " + parseInt(portfolio[coin.symbol] * coin.price_btc * zebpayResult.sell).toLocaleString('en-US', loc);
+    message += "Rs. " + parseInt(portfolio[coin.symbol] * coin.price_btc * zebpayResult.sell).toLocaleString('en-US');
     return message;
 }
 
@@ -75,19 +71,16 @@ function compareLastResults(oldC, newC) {
             if( 
                 Math.abs(newC[id].percent_change_1h) > PERCENT_HALT
                 && 
-                notify[newC[id]] !== newC[id].percent_change_1h
+                notify[newC[id].symbol] !== newC[id].percent_change_1h
             ){
                 chrome.notifications.create(token.symbol,{
                     type: 'basic',
-                    iconUrl: 'img/' + token.symbol.toLowerCase() + '.png',
+                    iconUrl: '/img/' + token.symbol.toLowerCase() + '.png',
                     title: token.name + ' [' + token.symbol + '] ',
                     message: getChangeMessage(newC[id])
-                },function(){
-                    
                 });
-                
-                notify[newC[id]] = newC[id].percent_change_1h;
             }
+            notify[newC[id].symbol] = newC[id].percent_change_1h;
         }
     });
 }
