@@ -1,14 +1,19 @@
 var zebpayResult = null;
 var coinmarketcapResult = null;
 var API_TIMEOUT = 30000; // 30 seconds
-var investment = 160000; // Rs.1,70,000
+var investment = 170000; // Rs.1,70,000
 var PERCENT_HALT = 1;
 var portfolio = {
-    "BTC": "0.0",
-    "ETH": "0.0",
-    "LTC": "0.0",
-    "DASH": "0.0",
-    "NEO": "92.19540918"
+    "BTC"	: "0.0",
+    "ETH"	: "0.0",
+    "LTC"	: "0.0",
+    "DASH"	: "0.0",
+    "MIOTA" 	: "109.627",
+    "NEO"	: "59.54869291", //"12.93487872",
+    "TRIG"	: "0.0",//"386.62790698",
+    "OMG"	: "0.0",//"35.69217778",
+    "STORJ"	: "0.0",//"695.21884583",
+    "ARK"	: "105.75316293"//"35.68234663"
 };
 var notify = {};
 

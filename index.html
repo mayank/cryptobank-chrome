@@ -7,38 +7,57 @@
 </head>
 
 <body>
-    <table class="table-responsive table text-center">
-        <thead>
-            <tr>
-                <th colspan="4" class="text-left">
-                    <h4>
-                        Zebpay : <span id="btc" class="text-warning"></span>
-                    </h4>
-                </th>
-                <th class="text-center">
-                    <h4 id="calculated"></h4>
-                </th>
-                <th colspan="3" class="text-right">
-                    <h4>
-                        <span id="totalpre"></span> BTC = <span id="totalpost" class="text-success"></span>
-                    </h4>
-                </th>
-            </tr>
-            <tr class="info">
-                <th class="text-center">Coin</th>
-                <th class="text-center">% (1h)</th>
-                <th class="text-center">% (24h)</th>
-                <th class="text-center">Price (BTC)</th>
-                <th class="text-center">Price (USD)</th>
-                <th class="text-center">Wallet</th>
-                <th class="text-center">BTC</th>
-                <th class="text-center">INR</th>
-            </tr>
-        </thead>
-        <tbody id="list">
-        </tbody>
-    </table>
+    <div class="row-fluid">
+        <div class="col-xs-3 np">
+            <div class="h4 text-center">
+                <div>Zebpay</div>
+                <div class="text-warning mt10" id="btc"></div>
+                <div class="mt20">Profit Margins</div>
+                <div id="calculated"></div>
+                <div class="mt20">
+                    <span id="totalpre"></span> BTC <br>
+                    = 
+                    <br>
+                    <span id="totalpost" class="text-success"></span>
+                </div>
+            </div>
+            <ul class="nav nav-pills nav-stacked mt20">
+                <li class="active"><a data-toggle="tab" href="#portfolio">Portfolio</a></li>
+                <li><a data-toggle="tab" href="#graphs">Graphs</a></li>
+                <li><a data-toggle="tab" href="#settings">Settings</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-9 ml0 mr0 pr0">
+            <div class="tab-content">
+                <div id="settings" class="tab-pane fade">
+                </div>
+                <div id="graphs" class="tab-pane fade">
+                    <div id="chartContainer"></div>
+                </div>
+                <div id="portfolio" class="tab-pane fade in active">
+                    <table class="table-responsive table text-center">
+                        <thead>
+                            <tr class="info">
+                                <th class="text-center">Coin</th>
+                                <th class="text-center">% (1h)</th>
+                                <th class="text-center">% (24h)</th>
+                                <th class="text-center">Price (BTC)</th>
+                                <th class="text-center">Price (USD)</th>
+                                <th class="text-center">Wallet</th>
+                                <th class="text-center">BTC</th>
+                                <th class="text-center">INR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/canvas.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 

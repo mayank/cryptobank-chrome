@@ -40,6 +40,27 @@ $(document).ready(function() {
     port.postMessage({
         type: 'currency-init'
     });
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "theme1",
+		animationEnabled: true,
+        axisX: {
+            minimum: 0,
+            maximum: 23,
+            intervalType: "hours"
+        },
+        axisY:{
+            includeZero: false    
+        },
+		data: [              
+		{
+			type: "line",
+            dataPoints: [
+            ]
+        }]
+	});
+	chart.render();
+    
 });
 
 function startFetchingData() {
@@ -59,7 +80,7 @@ function startFetchingData() {
     var inrCost = walletBalance * zebpayAPI.sell;
     var profitLoss = (inrCost - investment) / investment;
     
-    $('#calculated').html(Math.abs(profitLoss * 100).toFixed(2) + '%');
+    $('#calculated').html((profitLoss * 100).toFixed(2) + '%');
     if (profitLoss < 0) {
         $('#calculated').addClass("text-danger").removeClass("text-success");
     } else {

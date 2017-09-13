@@ -1,3 +1,27 @@
 html, body {
-    width: 700px;
+    width: 800px;
+}
+
+.np {
+    padding: 0;
+}
+
+.pr0 {
+    padding-right: 0;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.ml0 {
+    margin-left: 0 !important;
+}
+
+.mr0 {
+    margin-right: 0 !important;
 }
