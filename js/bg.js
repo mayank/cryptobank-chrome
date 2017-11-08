@@ -1,19 +1,18 @@
 var zebpayResult = null;
 var coinmarketcapResult = null;
 var API_TIMEOUT = 30000; // 30 seconds
-var investment = 170000; // Rs.1,70,000
+var investment = 370000; // Rs.2,50,000
 var PERCENT_HALT = 1;
 var portfolio = {
-    "BTC"	: "0.0",
+    "BTC"	: "0.00000110",
     "ETH"	: "0.0",
-    "LTC"	: "0.0",
-    "DASH"	: "0.0",
-    "MIOTA" 	: "109.627",
-    "NEO"	: "59.54869291", //"12.93487872",
-    "TRIG"	: "0.0",//"386.62790698",
-    "OMG"	: "0.0",//"35.69217778",
-    "STORJ"	: "0.0",//"695.21884583",
-    "ARK"	: "105.75316293"//"35.68234663"
+    "LTC"	: "22.75889975",
+    "BCH" 	: "0.00000040",
+    "ZEC" 	: "0.0",
+    "PRG"	: "131.471353",
+    "NEO"	: "132.73980650",
+    "DCR"	: "11.50890714",
+    "MIOTA"	: "109.62669602"
 };
 var notify = {};
 
@@ -98,7 +97,7 @@ function zebpayAPI(cb) {
 }
 
 function coinmarketcapAPI(cb) {
-    $.get('https://api.coinmarketcap.com/v1/ticker/', function(result) {
+    $.get('https://api.coinmarketcap.com/v1/ticker/?limit=0', function(result) {
         cb(result);
     });
 }

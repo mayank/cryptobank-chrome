@@ -78,9 +78,10 @@ function startFetchingData() {
     $('#totalpre').html(walletBalance.toFixed(5));
     
     var inrCost = walletBalance * zebpayAPI.sell;
-    var profitLoss = (inrCost - investment) / investment;
+    var money = inrCost - investment;
+    var profitLoss = money / investment;
     
-    $('#calculated').html((profitLoss * 100).toFixed(2) + '%');
+    $('#calculated').html((profitLoss * 100).toFixed(2) + '% <small>' + money.toFixed(2) + '</small>');
     if (profitLoss < 0) {
         $('#calculated').addClass("text-danger").removeClass("text-success");
     } else {
