@@ -67,20 +67,23 @@ function startFetchingData() {
     var walletBalance = 0;
     var coinKey = Object.keys(portfolio);
     coinKey.forEach(function(currency) {
-        coinAPI.forEach(function(coin) {
-            if (coin.symbol == currency) {
-                walletBalance += parseFloat(setTheTuple(coin, portfolio[currency]));
-            }
-        });
-
+	portfolio[currency].forEach(function(currencyBlock){
+	    coinAPI.forEach(function(coin) {
+        	if (coin.symbol == currency) {
+                     walletBalance += parseFloat(setTheTuple(coin, currencyBlock));
+           	}	
+       	    });
+	});
     });
 
     $('#totalpre').html(walletBalance.toFixed(5));
     
     var inrCost = walletBalance * zebpayAPI.sell;
-    var profitLoss = (inrCost - investment) / investment;
+    var money = inrCost - investment;
+    var profitLoss = money / investment;
     
     $('#calculated').html((profitLoss * 100).toFixed(2) + '%');
+    $('#calculated').append('<p><small>' + Math.round(money).toLocaleString('en-US', loc) + '</small></p>');
     if (profitLoss < 0) {
         $('#calculated').addClass("text-danger").removeClass("text-success");
     } else {
@@ -94,7 +97,6 @@ function startFetchingData() {
         var inr = balance * parseFloat(zebpayAPI.sell);
         
         $(this).html(Math.floor(inr).toLocaleString('en-US', loc));
-        
         /*
         
 
@@ -135,10 +137,8 @@ function setTheTuple(coin, balance) {
         '<p class="totalpost text-info" data-balance="' + walletBalance + '"></p>' +
         '</td>' +
         '</tr>';
-    if (elem.length > 0) {
-        $(elem).replaceWith(html);
-    } else {
-        $('#list').prepend(html);
-    }
+   
+    $('#list').prepend(html);
+
     return walletBalance;
 }
