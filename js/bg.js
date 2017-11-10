@@ -1,18 +1,17 @@
 var zebpayResult = null;
 var coinmarketcapResult = null;
 var API_TIMEOUT = 30000; // 30 seconds
-var investment = 370000; // Rs.2,50,000
+var investment = 370000; // Rs.3,70,000
 var PERCENT_HALT = 1;
 var portfolio = {
-    "BTC"	: "0.00000110",
-    "ETH"	: "0.0",
-    "LTC"	: "22.75889975",
-    "BCH" 	: "0.00000040",
-    "ZEC" 	: "0.0",
-    "PRG"	: "131.471353",
-    "NEO"	: "132.73980650",
-    "DCR"	: "11.50890714",
-    "MIOTA"	: "109.62669602"
+    "BTC"	: ["0.0"],
+    "ETH"	: ["0.0"],
+    "LTC"	: ["22.75889975"],
+    "DASH"	: ["0.0"],
+    "MIOTA" 	: ["109.627"],
+    "NEO"	: ["74.6353239","58.10448256"],
+    "DCR"	: ["11.50890714"],
+    "PRG"	: ["131.471353"]
 };
 var notify = {};
 
@@ -64,8 +63,10 @@ function getAPIData() {
 function getChangeMessage(coin){
     var message = "";
     message += coin.percent_change_1h + "% [" + coin.percent_change_24h + "%] with value " + coin.price_usd + "$\n";
-    message += "Your coin now values ";
-    message += "Rs. " + parseInt(portfolio[coin.symbol] * coin.price_btc * zebpayResult.sell).toLocaleString('en-US');
+    portfolio[coin.symbol].forEach(function(data){
+    	message += "Your coin now values ";
+    	message += "Rs. " + parseInt(data * coin.price_btc * zebpayResult.sell).toLocaleString('en-US');
+    });
     return message;
 }
 
