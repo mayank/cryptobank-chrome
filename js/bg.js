@@ -1,16 +1,16 @@
 var zebpayResult = null;
 var coinmarketcapResult = null;
 var API_TIMEOUT = 90000; // 90 seconds
-var investment = 390000; // Rs.3,90,000
+var investment = 440000; // Rs.3,90,000
 var PERCENT_HALT = 1;
 var portfolio = {
-    "BCH"	: ["0.83028728"],
+    "BCH"	  : ["0.83028728"],
     "SNGLS"	: ["959.59571970"],
-    "BTC"	: ["0.0"], //22.75889975"],
-    "MIOTA" 	: ["109.627"],
-    "NEO"	: ["74.6353239","58.10448256"],
+    "BTC"	  : ["0.0"], //22.75889975"],
+    "MIOTA" : ["109.627","207.777833"],
+    "NEO"	  : ["74.6353239","58.10448256"],
     "QTUM"	: ["11.67024371"], //11.50890714"],
-    "PRG"	: ["131.471353"]
+    "PRG"	  : ["131.471353"]
 };
 var notify = {};
 
@@ -61,11 +61,13 @@ function getAPIData() {
 
 function getChangeMessage(coin){
     var message = "";
-    message += coin.percent_change_1h + "% [" + coin.percent_change_24h + "%] with value " + coin.price_usd + "$\n";
-    portfolio[coin.symbol].forEach(function(data){
-    	message += "Your coin now values ";
-    	message += "Rs. " + parseInt(data * coin.price_btc * zebpayResult.sell).toLocaleString('en-US');
-    });
+    if(portfolio[coin.symbol]){
+      message += coin.percent_change_1h + "% [" + coin.percent_change_24h + "%] with value " + coin.price_usd + "$\n";
+      portfolio[coin.symbol].forEach(function(data){
+        message += "Your coin now values ";
+        message += "Rs. " + parseInt(data * coin.price_btc * zebpayResult.sell).toLocaleString('en-US');
+      });  
+    }
     return message;
 }
 
@@ -91,7 +93,7 @@ function compareLastResults(oldC, newC) {
 
 
 function zebpayAPI(cb) {
-    $.get('https://api.zebpay.com/api/v1/ticker?currencyCode=INR', function(result) {
+    $.get('https://www.zebapi.com/api/v1/market/ticker/btc/inr', function(result) {
         cb(result);
     });
 }
